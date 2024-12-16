@@ -1,3 +1,11 @@
 package com.example.pertemuan11.data.entity
 
-data class Dosen()
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "dosen")
+data class Dosen(
+    @PrimaryKey val nidn: String,
+    val nama: String,
+    val jenisKelamin: String
+)
