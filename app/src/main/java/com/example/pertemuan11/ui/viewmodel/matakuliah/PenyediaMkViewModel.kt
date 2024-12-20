@@ -26,6 +26,12 @@ object PenyediaMkViewModel {
                 KrsApp().containerApp.repositoryMk,
             )
         }
+        initializer {
+            UpdateMataKuliahViewModel(
+                createSavedStateHandle(),
+                KrsApp().containerApp.repositoryMk,
+            )
+        }
     }
 }
 
