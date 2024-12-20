@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pertemuan11.data.entity.MataKuliah
+import com.example.pertemuan11.navigation.DestinasiMataKuliahUpdate
 import com.example.pertemuan11.repository.RepositoryMk
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -20,7 +21,7 @@ class UpdateMataKuliahViewModel(
     var updateUIState by mutableStateOf(MatakuliahUIState())
         private set
 
-    private val _kode: String = checkNotNull(savedStateHandle[DestinasiMatakuliahUpdate.KODE])
+    private val _kode: String = checkNotNull(savedStateHandle[DestinasiMataKuliahUpdate.KODE])
 
     init {
         viewModelScope.launch {
