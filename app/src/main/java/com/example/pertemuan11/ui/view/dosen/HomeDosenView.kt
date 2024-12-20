@@ -1,5 +1,6 @@
 package com.example.pertemuan11.ui.view.dosen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +13,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
@@ -32,10 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan11.R
 import com.example.pertemuan11.data.entity.Dosen
 import com.example.pertemuan11.ui.customwidget.TopAppBar
 import com.example.pertemuan11.ui.viewmodel.dosen.HomeDosenViewModel
@@ -54,13 +59,18 @@ fun HomeDosenView(
     Scaffold(
         modifier= Modifier
             .fillMaxSize()
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
             .padding(16.dp)
             .padding(top = 18.dp),
         topBar = {
             TopAppBar(
                 judul = "Daftar Dosen",
-                showBackButton = false,
-                onBack = { },
+                showBackButton = true,
+                onBack = onBack,
                 modifier = modifier
             )
         },
@@ -85,7 +95,13 @@ fun HomeDosenView(
                 onDetailClick(it)
                 println(it)
             },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .background(
+                    color = colorResource(
+                        id = R.color.primary
+                    )
+                )
+                .padding(innerPadding)
         )
     }
 }
@@ -101,7 +117,14 @@ fun BodyHomeDosenView(
     when {
         homeUiState.isLoading -> {
             Box(
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
+                    .fillMaxSize(),
+
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
@@ -119,7 +142,13 @@ fun BodyHomeDosenView(
         }
         homeUiState.listDsn.isEmpty() -> {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
+                    .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -149,7 +178,15 @@ fun ListDosen(
     modifier: Modifier = Modifier,
     onClick: (String) -> Unit = {}
 ){
-    LazyColumn(modifier = modifier) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
+    ) {
         items(
             items = listDsn,
             itemContent = { dsn ->
@@ -172,7 +209,11 @@ fun CardDosen(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+                colors = androidx.compose.material3.CardDefaults.cardColors( // Warna interaktif kartu
+                containerColor = colorResource(id = R.color.white), // Warna default
+        contentColor = colorResource(id = R.color.black)
+                )
     ){
         Column(
             modifier = Modifier.padding(8.dp)
@@ -181,7 +222,7 @@ fun CardDosen(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Filled.Lock, contentDescription = "")
+                Icon(imageVector = Icons.Filled.Info, contentDescription = "")
                 Spacer(modifier = Modifier.padding(4.dp))
                 Text(
                     text = dsn.nidn,
@@ -205,7 +246,7 @@ fun CardDosen(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Filled.PlayArrow, contentDescription = "")
+                Icon(imageVector = Icons.Filled.Face, contentDescription = "")
                 Spacer(modifier = Modifier.padding(4.dp))
                 Text(
                     text = dsn.jenisKelamin,
