@@ -65,8 +65,8 @@ fun HomeMataKuliahView(
         topBar = {
             TopAppBar(
                 judul = "Daftar Matakuliah",
-                showBackButton = false,
-                onBack = { },
+                showBackButton = true,
+                onBack = onBack,
                 modifier = modifier
             )
         },
