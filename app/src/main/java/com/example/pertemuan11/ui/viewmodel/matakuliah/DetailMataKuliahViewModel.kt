@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pertemuan11.data.entity.MataKuliah
+import com.example.pertemuan11.navigation.DestinasiMataKuliahDetail
 import com.example.pertemuan11.repository.RepositoryMk
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,7 +21,7 @@ class DetailMataKuliahViewModel(
     private val repositoryMk: RepositoryMk,
 ) : ViewModel() {
 
-    private val _kode: String = checkNotNull(savedStateHandle[DestinasiMatakuliahDetail.KODE])
+    private val _kode: String = checkNotNull(savedStateHandle[DestinasiMataKuliahDetail.KODE])
 
     val detailMatakuliahUiState: StateFlow<DetailMatakuliahUiState> = repositoryMk.getMk(_kode)
         .filterNotNull()
