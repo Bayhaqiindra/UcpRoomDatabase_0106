@@ -1,5 +1,6 @@
 package com.example.pertemuan11.ui.view.dosen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,10 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -23,9 +27,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan11.R
 import com.example.pertemuan11.navigation.AlamatNavigasi
 import com.example.pertemuan11.ui.customwidget.TopAppBar
 import com.example.pertemuan11.ui.viewmodel.dosen.DosenEvent
@@ -53,6 +59,7 @@ fun InsertDosenView(
     val snackbarHostState = remember{ SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
+
     LaunchedEffect(uiState.snackBarMessage) {
         uiState.snackBarMessage?.let { message ->
             coroutineScope.launch {
@@ -76,6 +83,11 @@ fun InsertDosenView(
     ) { padding ->
         Column(
             modifier = Modifier
+                .background(
+                    color = colorResource(
+                        id = R.color.primary
+                    )
+                )
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp)
@@ -104,7 +116,13 @@ fun InsertBodyDosen(
     uiState: DosenUIState
 ){
     Column (
-        modifier= modifier.fillMaxWidth(),
+        modifier= modifier
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -112,13 +130,23 @@ fun InsertBodyDosen(
             dosenEvent = uiState.dosenEvent,
             onValueChange = onValueChange,
             errorState = uiState.isEntryValid,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .background(
+                    color = colorResource(
+                        id = R.color.primary
+                    )
+                )
+                .fillMaxWidth()
         )
         Button(
             onClick = onClick,
             modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.White, // Tombol berwarna putih
+                contentColor = Color.Black // Teks pada tombol berwarna hitam
+            )
         ) {
-            Text("Simpan")
+            Text("Simpan", color = Color.Black)
         }
     }
 }
@@ -133,7 +161,13 @@ fun FormDosen(
     val jenisKelamin = listOf("Laki-Laki", "Perempuan")
 
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
+            .fillMaxWidth()
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -141,9 +175,10 @@ fun FormDosen(
             onValueChange = {
                 onValueChange(dosenEvent.copy(nama = it))
             },
-            label = { Text("Nama") },
+            label = { Text("Nama", color = Color.White) },
             isError = errorState.nama != null,
             placeholder = { Text("Masukkan Nama") },
+            shape = RoundedCornerShape(16.dp)
             )
         Text(
             text = errorState.nama ?: "",
@@ -156,9 +191,10 @@ fun FormDosen(
             onValueChange = {
                 onValueChange(dosenEvent.copy(nidn = it))
             },
-            label = { Text("NIDN") },
+            label = { Text("NIDN", color = Color.White) },
             isError = errorState.nidn != null,
-            placeholder = { Text("Masukkan NIDN") },
+            placeholder = { Text("Masukkan NIDN", color = Color.White) },
+            shape = RoundedCornerShape(16.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         Text(
@@ -166,8 +202,7 @@ fun FormDosen(
             color = Color.Red
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Jenis Kelamin")
+        Text(text = "Jenis Kelamin", color = Color.White)
         Row(
             modifier = Modifier.fillMaxWidth()
 
@@ -182,9 +217,14 @@ fun FormDosen(
                         onClick = {
                             onValueChange(dosenEvent.copy(jenisKelamin = jk))
                         },
+                        colors = RadioButtonDefaults.colors(
+                            selectedColor = Color.White, // Radio button putih ketika dipilih
+                            unselectedColor = Color.White // Radio button putih ketika tidak dipilih
+                        )
                     )
                     Text(
                         text = jk,
+                        color = Color.White
                     )
                 }
             }
