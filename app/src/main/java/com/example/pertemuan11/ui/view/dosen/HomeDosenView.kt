@@ -117,5 +117,15 @@ fun BodyHomeDosenView(
                 )
             }
         }
+        else -> {
+            ListDosen(
+                listDsn = homeUiState.listDsn,
+                onClick = {
+                    onClick(it)
+                    println(it)
+                },
+                modifier = modifier
+            )
+        }
     }
 }
