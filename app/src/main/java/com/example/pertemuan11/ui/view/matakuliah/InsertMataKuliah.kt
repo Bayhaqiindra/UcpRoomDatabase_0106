@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -17,8 +18,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.pertemuan11.data.entity.Dosen
+import com.example.pertemuan11.ui.viewmodel.dosen.HomeUiState
 import com.example.pertemuan11.ui.viewmodel.matakuliah.FormErrorState
 import com.example.pertemuan11.ui.viewmodel.matakuliah.MatakuliahEvent
+import com.example.pertemuan11.ui.viewmodel.matakuliah.MatakuliahUIState
+
+@Composable
+fun InsertBodyMataKuliah(
+    modifier: Modifier = Modifier,
+    onValueChange: (MatakuliahEvent) -> Unit,
+    onClick: () -> Unit,
+    uiState: MatakuliahUIState,
+    listDosen: HomeUiState
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        FormMataKuliah(
+            matakuliahEvent = uiState.matakuliahEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            modifier = Modifier.fillMaxWidth(),
+            listDsn = listDosen.listDsn
+        )
+        Button(
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Simpan")
+        }
+    }
+}
 
 @Composable
 fun FormMataKuliah(
