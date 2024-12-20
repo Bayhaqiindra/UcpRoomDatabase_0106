@@ -48,7 +48,7 @@ fun HalamanUtamaView(
                 .padding(bottom = 16.dp)
         )
 
-        StaticButton(text = "D", onClick = onDosenClick)
+        StaticButton(text = "Dosen", onClick = onDosenClick)
         StaticButton(text = "Matakuliah", onClick = onMataKuliahClick)
     }
 }
