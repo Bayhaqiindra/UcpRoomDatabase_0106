@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan11.navigation.AlamatNavigasi
 import com.example.pertemuan11.ui.customwidget.TopAppBar
 import com.example.pertemuan11.ui.viewmodel.dosen.DosenEvent
 import com.example.pertemuan11.ui.viewmodel.dosen.DosenUIState
@@ -36,6 +37,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+object DestinasiDosenInsert : AlamatNavigasi {
+    override val route = "insert_dsn"
+}
 
 @Composable
 fun InsertDosenView(
