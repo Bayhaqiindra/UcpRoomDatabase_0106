@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -24,6 +25,7 @@ import com.example.pertemuan11.ui.customwidget.TopAppBar
 import com.example.pertemuan11.ui.viewmodel.dosen.HomeDosenViewModel
 import com.example.pertemuan11.ui.viewmodel.dosen.HomeUiState
 import com.example.pertemuan11.ui.viewmodel.dosen.PenyediaDosenViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeDosenView(
@@ -89,5 +91,16 @@ fun BodyHomeDosenView(
                 CircularProgressIndicator()
             }
         }
+
+        homeUiState.isError -> {
+            LaunchedEffect(homeUiState.errorMessage) {
+                homeUiState.errorMessage?.let { message ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(message)
+                    }
+                }
+            }
+        }
+
     }
 }
