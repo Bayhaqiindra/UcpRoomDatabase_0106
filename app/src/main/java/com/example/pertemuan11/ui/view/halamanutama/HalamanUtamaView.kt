@@ -36,16 +36,27 @@ fun HalamanUtamaView(
                     id = R.color.primary
                 )
             )
-            .padding(16.dp),
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Text(
+            text = "Universitas Muhammadiyah Yogyakarta",
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 20.dp),
+            textAlign = androidx.compose.ui.text.style.TextAlign.Center
+        )
+
         Image(
             painter = painterResource(id = R.drawable.umy),
-            contentDescription = "Example Image",
+            contentDescription = "Logo Umy",
             modifier = Modifier
-                .size(150.dp)
-                .padding(bottom = 16.dp)
+                .size(180.dp)
+                .padding(bottom = 15.dp)
         )
 
         StaticButton(text = "Dosen", onClick = onDosenClick)
@@ -63,7 +74,7 @@ fun StaticButton(text: String, onClick: () -> Unit) {
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(32.dp)
+            .padding(15.dp)
     ) {
         Text(
             text = text,
