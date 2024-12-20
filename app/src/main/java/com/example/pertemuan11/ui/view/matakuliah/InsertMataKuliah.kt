@@ -43,6 +43,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+object DestinasiMataKuliahInsert : AlamatNavigasi {
+    override val route = "matakuliah_insert"
+}
+
 @Composable
 fun InsertMataKuliahView(
     onBack: () -> Unit,
