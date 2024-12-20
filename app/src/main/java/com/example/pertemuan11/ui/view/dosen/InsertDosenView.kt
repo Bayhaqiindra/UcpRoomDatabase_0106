@@ -122,5 +122,5 @@ fun FormDosen(
     errorState: FormErrorState = FormErrorState(),
     modifier: Modifier = Modifier
 ){
-
+    val jenisKelamin = listOf("Laki-Laki", "Perempuan")
 }
