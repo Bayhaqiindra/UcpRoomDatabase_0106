@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
@@ -23,11 +24,16 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -35,9 +41,59 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pertemuan11.data.entity.MataKuliah
+import com.example.pertemuan11.ui.customwidget.TopAppBar
+import com.example.pertemuan11.ui.viewmodel.matakuliah.HomeMataKuliahViewModel
 import com.example.pertemuan11.ui.viewmodel.matakuliah.HomeMatakuliahUiState
+import com.example.pertemuan11.ui.viewmodel.matakuliah.PenyediaMkViewModel
 import kotlinx.coroutines.launch
+
+@Composable
+fun HomeMatakuliahView(
+    viewModel: HomeMataKuliahViewModel = viewModel(factory = PenyediaMkViewModel.Factory),
+    onAddMatakuliah: () -> Unit = {},
+    onBack:()->Unit,
+    onDetailClick: (String) -> Unit = {},
+    modifier: Modifier = Modifier
+) {
+    Scaffold(
+        modifier= Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .padding(top = 18.dp),
+        topBar = {
+            TopAppBar(
+                judul = "Daftar Matakuliah",
+                showBackButton = false,
+                onBack = { },
+                modifier = modifier
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddMatakuliah,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Tambah Matakuliah",
+                )
+            }
+        }
+    ){ innerPadding ->
+        val homeUiState by viewModel.homeMatakuliahUiState.collectAsState()
+
+        BodyHomeMataKuliahView(
+            homeMatakuliahUiState = homeUiState,
+            onClick = {
+                onDetailClick(it)
+            },
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
+}
 
 @Composable
 fun BodyHomeMataKuliahView(
