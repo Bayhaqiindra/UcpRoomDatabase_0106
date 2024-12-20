@@ -10,6 +10,23 @@ import com.example.pertemuan11.repository.RepositoryDosen
 class DosenViewModel(private val repositoryDosen: RepositoryDosen) : ViewModel() {
     var uiState by mutableStateOf(DosenUIState())
 
+    fun updateState(dosenEvent: DosenEvent) {
+        uiState = uiState.copy(
+            dosenEvent = dosenEvent
+        )
+    }
+
+    private fun validateField(): Boolean {
+        val event = uiState.dosenEvent
+        val errorState = FormErrorState(
+            nidn = if (event.nidn.isNotEmpty()) null else "NIDN tidak boleh kosong",
+            nama = if (event.nama.isNotEmpty()) null else "Nama tidak boleh kosong",
+            jeniskelamin = if (event.jenisKelamin.isNotEmpty()) null else "Jenis kelamin tidak boleh kosong"
+        )
+        uiState = uiState.copy(isEntryValid = errorState)
+        return errorState.isValid()
+    }
+
 data class DosenUIState(
     val dosenEvent: DosenEvent = DosenEvent(),
     val isEntryValid:FormErrorState = FormErrorState(),
