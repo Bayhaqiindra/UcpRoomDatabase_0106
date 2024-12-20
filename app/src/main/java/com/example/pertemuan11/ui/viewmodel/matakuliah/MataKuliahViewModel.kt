@@ -2,6 +2,20 @@ package com.example.pertemuan11.ui.viewmodel.matakuliah
 
 import com.example.pertemuan11.data.entity.MataKuliah
 
+data class FormErrorState(
+    val kode: String? = null,
+    val nama: String? = null,
+    val sks: String? = null,
+    val semester: String? = null,
+    val jenis: String? = null,
+    val dosenPengampu: String? = null,
+){
+    fun isValid(): Boolean {
+        return kode == null && nama == null && sks == null &&
+                semester == null && jenis == null && dosenPengampu == null
+    }
+}
+
 fun MatakuliahEvent.toMatakuliahEntity(): MataKuliah = MataKuliah(
     kode = kode,
     nama = nama,
