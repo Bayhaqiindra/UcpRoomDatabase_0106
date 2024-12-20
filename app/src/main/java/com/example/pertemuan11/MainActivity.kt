@@ -1,5 +1,6 @@
 package com.example.pertemuan11
 
+import PengelolaHalaman
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,8 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Pertemuan11Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    PengelolaHalaman(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
