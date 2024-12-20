@@ -145,7 +145,7 @@ fun FormMataKuliah(
     listDsn: List<Dosen>
 ) {
     val semester = listOf("Ganjil", "Genap")
-    val jenis = listOf("Programming", "Data", "Network", "UI/UX")
+    val jenis = listOf("Programming", "Data", "Network")
     val namaDosenList = listDsn.map { it.nama }
 
     Column(
@@ -182,7 +182,6 @@ fun FormMataKuliah(
             color = Color.Red
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
 
         Text(text = "Semester")
         Row(
@@ -196,7 +195,7 @@ fun FormMataKuliah(
                     RadioButton(
                         selected = matakuliahEvent.semester == semesterOption,
                         onClick = {
-                            onValueChange(matakuliahEvent.copy(jenis = semesterOption))
+                            onValueChange(matakuliahEvent.copy(semester = semesterOption))
                         },
                     )
                     Text(text = semesterOption)
