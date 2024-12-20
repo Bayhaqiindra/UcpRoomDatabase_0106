@@ -79,3 +79,8 @@ fun InsertDosenView(
         }
     }
 }
+
+@Composable
+fun InsertBodyDosen(){
+
+}
