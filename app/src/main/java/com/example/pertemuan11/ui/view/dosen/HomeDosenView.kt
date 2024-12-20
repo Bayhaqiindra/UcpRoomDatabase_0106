@@ -3,6 +3,7 @@ package com.example.pertemuan11.ui.view.dosen
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
@@ -136,6 +137,25 @@ fun ListDosen(
     listDsn: List<Dosen>,
     modifier: Modifier = Modifier,
     onClick: (String) -> Unit = {}
+){
+    LazyColumn(modifier = modifier) {
+        items(
+            items = listDsn,
+            itemContent = { dsn ->
+                CardDosen(
+                    dsn = dsn,
+                    onClick = { onClick(dsn.nidn) }
+                )
+            }
+        )
+    }
+}
+
+@Composable
+fun CardDosen(
+    dsn: Dosen,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
 ){
 
 }
