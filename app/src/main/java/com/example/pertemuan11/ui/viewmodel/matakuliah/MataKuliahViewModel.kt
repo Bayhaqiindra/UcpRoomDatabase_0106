@@ -2,6 +2,12 @@ package com.example.pertemuan11.ui.viewmodel.matakuliah
 
 import com.example.pertemuan11.data.entity.MataKuliah
 
+data class MatakuliahUIState(
+    val matakuliahEvent: MatakuliahEvent = MatakuliahEvent(),
+    val isEntryValid:FormErrorState = FormErrorState(),
+    val snackBarMessage: String? = null,
+)
+
 data class FormErrorState(
     val kode: String? = null,
     val nama: String? = null,
