@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pertemuan11.R
 
 @Composable
-fun HomeView(
+fun HalamanUtamaView(
     onDosenClick: () -> Unit,
     onMataKuliahClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -40,7 +40,6 @@ fun HomeView(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // Example image at the top
         Image(
             painter = painterResource(id = R.drawable.umy),
             contentDescription = "Example Image",
@@ -49,7 +48,6 @@ fun HomeView(
                 .padding(bottom = 16.dp)
         )
 
-        // Buttons with text centered
         StaticButton(text = "D", onClick = onDosenClick)
         StaticButton(text = "Matakuliah", onClick = onMataKuliahClick)
     }
@@ -60,14 +58,13 @@ fun StaticButton(text: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White, // Matching primary purple
+            containerColor = Color.White,
             contentColor = Color.Black
         ),
         modifier = Modifier
             .fillMaxWidth()
             .padding(32.dp)
     ) {
-        // Centered text
         Text(
             text = text,
             fontSize = 18.sp,
