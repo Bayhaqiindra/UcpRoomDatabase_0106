@@ -182,7 +182,6 @@ fun FormMataKuliah(
             color = Color.Red
         )
 
-
         Text(text = "Semester")
         Row(
             modifier = Modifier.fillMaxWidth()
@@ -217,7 +216,6 @@ fun FormMataKuliah(
             text = errorState.sks ?: "",
             color = Color.Red
         )
-        Spacer(modifier = Modifier.height(16.dp))
 
         Text(text = "Jenis")
         Row(
