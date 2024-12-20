@@ -1,16 +1,32 @@
 package com.example.pertemuan11.ui.view.matakuliah
 
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.pertemuan11.data.entity.MataKuliah
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CardMatakuliah(
-    mtk: MataKuliah,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit = { }
+private fun DeleteConfirmationDialog(
+    onDeleteConfirm: () -> Unit,
+    onDeleteCancel: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-
+    AlertDialog(
+        onDismissRequest = { /* Do nothing */ },
+        title = { Text("Delete Data") },
+        text = { Text("Apakah anda yakin ingin menghapus data?") },
+        modifier = modifier,
+        dismissButton = {
+            TextButton(onClick = onDeleteCancel) {
+                Text(text = "Cancel")
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDeleteConfirm) {
+                Text(text = "Yes")
+            }
+        }
+    )
 }
