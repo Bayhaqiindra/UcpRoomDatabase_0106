@@ -10,6 +10,12 @@ import com.example.pertemuan11.repository.RepositoryMk
 class MataKuliahViewModel(private val repositoryMk: RepositoryMk): ViewModel() {
     var uiState by mutableStateOf(MatakuliahUIState())
 
+    fun updateState(matakuliahEvent: MatakuliahEvent) {
+        uiState = uiState.copy(
+            matakuliahEvent = matakuliahEvent
+        )
+    }
+
 
 data class MatakuliahUIState(
     val matakuliahEvent: MatakuliahEvent = MatakuliahEvent(),
