@@ -50,7 +50,7 @@ import com.example.pertemuan11.ui.viewmodel.matakuliah.PenyediaMkViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeMatakuliahView(
+fun HomeMataKuliahView(
     viewModel: HomeMataKuliahViewModel = viewModel(factory = PenyediaMkViewModel.Factory),
     onAddMatakuliah: () -> Unit = {},
     onBack:()->Unit,
@@ -202,6 +202,7 @@ fun CardMataKuliah(
                     fontSize = 20.sp
                 )
             }
+
             Row (
                 modifier = Modifier. fillMaxWidth (),
                 verticalAlignment = Alignment.CenterVertically
@@ -218,50 +219,50 @@ fun CardMataKuliah(
                         fontSize = 16.sp
                     )
                 }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(imageVector = Icons.Filled.Create, contentDescription = "")
-                    Spacer(modifier = Modifier.padding(4.dp))
-                    Text(
-                        text = mtk.semester,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-                    Spacer(modifier = Modifier.padding(4.dp))
-                    Text(
-                        text = mtk.sks,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(imageVector = Icons.Filled.CheckCircle, contentDescription = "")
-                    Spacer(modifier = Modifier.padding(4.dp))
-                    Text(
-                        text = mtk.jenis,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "")
-                    Spacer(modifier = Modifier.padding(4.dp))
-                    Text(
-                        text = mtk.dosenPengampu,
-                        fontWeight = FontWeight.Bold,
-                    )
-                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Filled.Create, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mtk.semester,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mtk.sks,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Filled.CheckCircle, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mtk.jenis,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Filled.AccountBox, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mtk.dosenPengampu,
+                    fontWeight = FontWeight.Bold,
+                )
             }
         }
     }
