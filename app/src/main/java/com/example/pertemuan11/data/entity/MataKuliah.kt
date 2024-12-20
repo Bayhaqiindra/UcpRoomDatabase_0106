@@ -11,5 +11,5 @@ data class MataKuliah(
     val sks: String,
     val semester: String,
     val jenis: String,
-    val dosenPengampu: String // Foreign key reference
+    val dosenPengampu: String
 )
