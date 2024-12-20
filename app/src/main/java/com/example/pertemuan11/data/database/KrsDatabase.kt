@@ -14,4 +14,21 @@ abstract class KrsDatabase : RoomDatabase() {
 
     abstract fun dosenDao(): DosenDao
     abstract fun matakuliahDao(): MataKuliahDao
+
+    companion object {
+        @Volatile
+        private var Instance:KrsDatabase? = null
+
+        //Membuat Database
+        fun getDataBase(context: Context): KrsDatabase {
+            return (Instance ?: synchronized(this){
+                Room.databaseBuilder(
+                    context,
+                    KrsDatabase::class.java,
+                    "KrsDatabase"
+                )
+                    .build().also { Instance = it}
+            })
+        }
+    }
 }
