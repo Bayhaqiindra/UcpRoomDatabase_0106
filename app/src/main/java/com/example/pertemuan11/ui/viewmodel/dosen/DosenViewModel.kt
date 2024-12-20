@@ -2,6 +2,12 @@ package com.example.pertemuan11.ui.viewmodel.dosen
 
 import com.example.pertemuan11.data.entity.Dosen
 
+data class DosenUIState(
+    val dosenEvent: DosenEvent = DosenEvent(),
+    val isEntryValid:FormErrorState = FormErrorState(),
+    val snackBarMessage: String? = null,
+)
+
 data class FormErrorState(
     val nidn:String? =null,
     val nama:String?= null,
