@@ -1,5 +1,6 @@
 package com.example.pertemuan11.ui.view.matakuliah
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -29,10 +31,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan11.R
 import com.example.pertemuan11.data.entity.MataKuliah
 import com.example.pertemuan11.ui.customwidget.TopAppBar
 import com.example.pertemuan11.ui.viewmodel.matakuliah.DetailMataKuliahViewModel
@@ -51,6 +55,11 @@ fun DetailMataKuliahView(
     Scaffold (
         modifier= Modifier
             .fillMaxSize()
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
             .padding(16.dp)
             .padding(top = 18.dp),
         topBar = {
@@ -67,7 +76,13 @@ fun DetailMataKuliahView(
                     onEditClick(viewModel.detailMatakuliahUiState.value.detailMatakuliahUiEvent.kode)
                 },
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
+                    .padding(16.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
@@ -79,7 +94,14 @@ fun DetailMataKuliahView(
         val detailUiState by viewModel.detailMatakuliahUiState.collectAsState()
 
         BodyDetailMataKuliah(
-            modifier = Modifier.padding(innerPadding),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    color = colorResource(
+                        id = R.color.primary
+                    )
+                )
+                .padding(innerPadding),
             detailMatakuliahUiState = detailUiState,
             onDeleteClick = {
                 viewModel.deleteMatakuliah()
@@ -100,7 +122,13 @@ fun BodyDetailMataKuliah(
     when {
         detailMatakuliahUiState.isLoading -> {
             Box(
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
+                    .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
@@ -110,6 +138,11 @@ fun BodyDetailMataKuliah(
         detailMatakuliahUiState.isUiEventNotEmpty -> {
             Column(
                 modifier = modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
@@ -120,7 +153,11 @@ fun BodyDetailMataKuliah(
                 Spacer(modifier = Modifier.padding(8.dp))
                 Button(
                     onClick = { deleteConfirmationRequired = true },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.white),
+                        contentColor = Color.Black
+                    )
                 ) {
                     Text(text = "Delete")
                 }
@@ -140,7 +177,13 @@ fun BodyDetailMataKuliah(
 
         detailMatakuliahUiState.isUiEventEmpty -> {
             Box(
-                modifier = modifier.fillMaxWidth(),
+                modifier = modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
+                    .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -159,10 +202,9 @@ fun ItemDetailMataKuliah(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
+        colors = androidx.compose.material3.CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.yellow),
+            contentColor = colorResource(id = R.color.black))
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
             ComponentDetailMataKuliah(judul = "Kode", isinya = matakuliah.kode)
@@ -187,14 +229,15 @@ fun ComponentDetailMataKuliah(
     isinya: String,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.Start
     ) {
         Text(
             text = "$judul : ",
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Gray
+            color = Color.White
         )
         Text(
             text = isinya,
@@ -211,7 +254,7 @@ private fun DeleteConfirmationDialog(
     modifier: Modifier = Modifier
 ) {
     AlertDialog(
-        onDismissRequest = { /* Do nothing */ },
+        onDismissRequest = { },
         title = { Text("Delete Data") },
         text = { Text("Apakah anda yakin ingin menghapus data?") },
         modifier = modifier,
