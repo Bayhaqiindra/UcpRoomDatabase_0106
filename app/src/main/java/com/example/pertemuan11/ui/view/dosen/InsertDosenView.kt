@@ -14,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -70,27 +71,30 @@ fun InsertDosenView(
     }
 
     Scaffold(
-        modifier = modifier,
+        modifier= Modifier
+            .fillMaxSize()
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
+            .padding(16.dp)
+            .padding(top = 18.dp),
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
-                onBack = onBack,
-                showBackButton = true,
                 judul = "Tambah Dosen",
+                showBackButton = true,
+                onBack = onBack,
                 modifier = modifier
             )
         }
     ) { padding ->
         Column(
             modifier = Modifier
-                .background(
-                    color = colorResource(
-                        id = R.color.primary
-                    )
-                )
                 .fillMaxSize()
+                .background(colorResource(id = R.color.primary))
                 .padding(padding)
-                .padding(16.dp)
         ) {
             InsertBodyDosen(
                 uiState = uiState,
@@ -99,9 +103,14 @@ fun InsertDosenView(
                 },
                 onClick = {
                     coroutineScope.launch {
-                        viewModel.saveData()
+                        if (viewModel.validateField()) {
+                            viewModel.saveData()
+                            delay(500)
+                            withContext(Dispatchers.Main) {
+                                onNavigate()
+                            }
+                        }
                     }
-                    onNavigate()
                 }
             )
         }
@@ -117,12 +126,13 @@ fun InsertBodyDosen(
 ){
     Column (
         modifier= modifier
+            .fillMaxWidth()
             .background(
                 color = colorResource(
                     id = R.color.primary
                 )
             )
-            .fillMaxWidth(),
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -131,19 +141,18 @@ fun InsertBodyDosen(
             onValueChange = onValueChange,
             errorState = uiState.isEntryValid,
             modifier = Modifier
+                .fillMaxWidth()
                 .background(
                     color = colorResource(
                         id = R.color.primary
                     )
                 )
-                .fillMaxWidth()
         )
         Button(
             onClick = onClick,
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White, // Tombol berwarna putih
-                contentColor = Color.Black // Teks pada tombol berwarna hitam
+                containerColor = Color.Yellow,
             )
         ) {
             Text("Simpan", color = Color.Black)
@@ -162,12 +171,12 @@ fun FormDosen(
 
     Column(
         modifier = modifier
+            .fillMaxWidth()
             .background(
                 color = colorResource(
                     id = R.color.primary
                 )
             )
-            .fillMaxWidth()
     ) {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -177,8 +186,13 @@ fun FormDosen(
             },
             label = { Text("Nama", color = Color.White) },
             isError = errorState.nama != null,
-            placeholder = { Text("Masukkan Nama") },
-            shape = RoundedCornerShape(16.dp)
+            placeholder = { Text("Masukkan Nama", color = Color.White) },
+            shape = RoundedCornerShape(16.dp),
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedTextColor = Color.White,
+                focusedTextColor = Color.White,
+                cursorColor = Color.White
+            )
             )
         Text(
             text = errorState.nama ?: "",
@@ -195,7 +209,12 @@ fun FormDosen(
             isError = errorState.nidn != null,
             placeholder = { Text("Masukkan NIDN", color = Color.White) },
             shape = RoundedCornerShape(16.dp),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedTextColor = Color.White,
+                focusedTextColor = Color.White,
+                cursorColor = Color.White
+            )
         )
         Text(
             text = errorState.nidn ?: "",
@@ -218,8 +237,8 @@ fun FormDosen(
                             onValueChange(dosenEvent.copy(jenisKelamin = jk))
                         },
                         colors = RadioButtonDefaults.colors(
-                            selectedColor = Color.White, // Radio button putih ketika dipilih
-                            unselectedColor = Color.White // Radio button putih ketika tidak dipilih
+                            selectedColor = Color.White,
+                            unselectedColor = Color.White
                         )
                     )
                     Text(

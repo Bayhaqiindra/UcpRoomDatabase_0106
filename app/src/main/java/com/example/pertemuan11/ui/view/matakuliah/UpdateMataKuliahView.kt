@@ -1,5 +1,6 @@
 package com.example.pertemuan11.ui.view.matakuliah
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,8 +15,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan11.R
 import com.example.pertemuan11.ui.customwidget.TopAppBar
 import com.example.pertemuan11.ui.viewmodel.dosen.HomeDosenViewModel
 import com.example.pertemuan11.ui.viewmodel.dosen.PenyediaDosenViewModel
@@ -54,20 +57,33 @@ fun UpdateMataKuliahView(
         }
     }
     Scaffold(
-        modifier = modifier,
+        modifier= Modifier
+            .fillMaxSize()
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
+            .padding(16.dp)
+            .padding(top = 18.dp),
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
             TopAppBar(
-                judul = "Edit Matakuliah",
+                judul = "Edit MataKuliah",
                 showBackButton = true,
                 onBack = onBack,
-                modifier = Modifier
+                modifier = modifier
             )
         }
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(
+                    color = colorResource(
+                        id = R.color.primary
+                    )
+                )
                 .padding(padding)
                 .padding(16.dp)
         ) {
