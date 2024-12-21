@@ -18,7 +18,7 @@ class MataKuliahViewModel(private val repositoryMk: RepositoryMk): ViewModel() {
         )
     }
 
-    private fun validateField(): Boolean {
+    fun validateField(): Boolean {
         val event = uiState.matakuliahEvent
         val errorState = FormErrorState(
             kode = if (event.kode.isNotEmpty()) null else "Kode tidak boleh kosong",
