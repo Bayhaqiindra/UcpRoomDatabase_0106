@@ -28,7 +28,7 @@ fun PengelolaHalaman(
 ) {
     NavHost(
         navController = navController,
-        startDestination = DestinasiHalamanUtama.route // Starting screen is HomeView
+        startDestination = DestinasiHalamanUtama.route
     ) {
         composable(route = DestinasiHalamanUtama.route) {
             HalamanUtamaView(
@@ -42,7 +42,6 @@ fun PengelolaHalaman(
             )
         }
 
-        // Dosen List Screen
         composable(route = DestinasiDosen.route) {
             HomeDosenView(
                 onBack = { navController.popBackStack() },
@@ -87,7 +86,6 @@ fun PengelolaHalaman(
             )
         }
 
-        // Detail Matakuliah Screen
         composable(
             DestinasiMataKuliahDetail.routesWithArg,
             arguments = listOf(
@@ -107,7 +105,6 @@ fun PengelolaHalaman(
             }
         }
 
-        // Update Matakuliah Screen
         composable(
             DestinasiMataKuliahUpdate.routesWithArg,
             arguments = listOf(
