@@ -1,6 +1,7 @@
 package com.example.pertemuan11.ui.widget
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -14,6 +15,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,11 +38,16 @@ fun DynamicSelectedTextField(
             readOnly = true,
             value = selectedValue,
             onValueChange = {},
-            label = { Text(text = label) },
+            label = { Text(text = label,color = Color.White) },
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
             },
-            colors = OutlinedTextFieldDefaults.colors(),
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedTextColor = Color.White,
+                focusedTextColor = Color.White,
+                cursorColor = Color.White
+            ),
+            shape = RoundedCornerShape(16.dp),
             modifier = Modifier.menuAnchor().fillMaxWidth()
         )
 

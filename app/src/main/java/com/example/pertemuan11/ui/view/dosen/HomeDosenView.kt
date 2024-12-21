@@ -35,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -152,9 +153,10 @@ fun BodyHomeDosenView(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Tidak ada data Dosen.",
+                    text = "Tidak ada data",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.white),
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -211,7 +213,7 @@ fun CardDosen(
             .fillMaxWidth()
             .padding(8.dp),
                 colors = androidx.compose.material3.CardDefaults.cardColors( // Warna interaktif kartu
-                containerColor = colorResource(id = R.color.white), // Warna default
+                containerColor = colorResource(id = R.color.yellow), // Warna default
         contentColor = colorResource(id = R.color.black)
                 )
     ){

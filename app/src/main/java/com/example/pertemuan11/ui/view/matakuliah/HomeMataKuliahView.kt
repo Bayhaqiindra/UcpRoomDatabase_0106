@@ -1,5 +1,6 @@
 package com.example.pertemuan11.ui.view.matakuliah
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,11 +14,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -38,10 +43,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.pertemuan11.R
 import com.example.pertemuan11.data.entity.MataKuliah
 import com.example.pertemuan11.ui.customwidget.TopAppBar
 import com.example.pertemuan11.ui.viewmodel.matakuliah.HomeMataKuliahViewModel
@@ -59,6 +67,11 @@ fun HomeMataKuliahView(
 ) {
     Scaffold(
         modifier= Modifier
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
             .fillMaxSize()
             .padding(16.dp)
             .padding(top = 18.dp),
@@ -90,7 +103,13 @@ fun HomeMataKuliahView(
             onClick = {
                 onDetailClick(it)
             },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier
+                .background(
+                    color = colorResource(
+                        id = R.color.primary
+                    )
+                )
+                .padding(innerPadding)
         )
     }
 }
@@ -107,7 +126,13 @@ fun BodyHomeMataKuliahView(
     when {
         homeMatakuliahUiState.isLoading -> {
             Box(
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
+                    .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()
@@ -125,13 +150,20 @@ fun BodyHomeMataKuliahView(
 
         homeMatakuliahUiState.listMtk.isEmpty() -> {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .background(
+                        color = colorResource(
+                            id = R.color.primary
+                        )
+                    )
+                    .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Tidak ada Data Matakuliah.",
+                    text = "Tidak ada Data",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
+                    color = colorResource(id = R.color.white),
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -161,6 +193,12 @@ fun ListMataKuliah(
 ) {
     LazyColumn(
         modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = colorResource(
+                    id = R.color.primary
+                )
+            )
     ) {
         items(
             items = listMtk,
@@ -185,7 +223,10 @@ fun CardMataKuliah(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(8.dp),
+        colors = androidx.compose.material3.CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.yellow),
+            contentColor = colorResource(id = R.color.black))
     ){
         Column(
             modifier = Modifier.padding(8.dp)
@@ -224,7 +265,7 @@ fun CardMataKuliah(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Filled.Create, contentDescription = "")
+                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
                 Spacer(modifier = Modifier.padding(4.dp))
                 Text(
                     text = mtk.semester,
@@ -235,7 +276,7 @@ fun CardMataKuliah(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ){
-                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
+                Icon(imageVector = Icons.Filled.ExitToApp, contentDescription = "")
                 Spacer(modifier = Modifier.padding(4.dp))
                 Text(
                     text = mtk.sks,
@@ -246,7 +287,7 @@ fun CardMataKuliah(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Filled.CheckCircle, contentDescription = "")
+                Icon(imageVector = Icons.Filled.Add, contentDescription = "")
                 Spacer(modifier = Modifier.padding(4.dp))
                 Text(
                     text = mtk.jenis,
